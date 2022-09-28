@@ -1,0 +1,29 @@
+service: atm-finder
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: rrrr
+  role: arn:aws:iam::xxxx/yyyy
+
+functions:
+  firstRun:
+    handler: handler.firstRun
+  findGeoCode:
+    handler: handler.findGeoCode
+  pushToAlgolia: 
+    handler: handler.pushToAlgolia
+  locationFailed: 
+    handler: handler.locationFailed
+  processUpdates: 
+    handler: handler.processUpdates
+  findLocations: 
+    handler: handler.findLocations
+    events:
+      - http:
+          cors: true
+          path: locations
+          method: get
+          private: false

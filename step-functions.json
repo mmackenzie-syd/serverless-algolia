@@ -1,0 +1,35 @@
+{
+    "StartAt": "FindGeoCode",
+    "States": {
+      "FindGeoCode": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:xxxx",
+        "End": true
+      },
+      "ChoiceState": {
+        "Type": "Choice",
+        "Choices": [
+            {
+                "Variable": "$.searchable",
+                "BooleanEquals": true,
+                "Next": "PushToAlgolia"
+            },
+            {
+                "Variable": "$.searchable",
+                "BooleanEquals": false,
+                "Next": "LocationFailed"
+            }
+        ],
+        "PushToAlgolia": {
+            "Type": "Task",
+            "Resource": "",
+            "End": true
+        },
+        "LocationFailed": {
+            "Type": "Task",
+            "Resource": "",
+            "End": true
+          }
+      }
+    }
+  }
